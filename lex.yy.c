@@ -517,7 +517,10 @@ char *yytext;
 #include<stdlib.h>
 #include<ctype.h>
 #include<string.h>
+#include<string>
 #include "y.tab.h"
+#include "Tree.h"
+extern int level;
 #define LEN sizeof(struct Word)
 const int kFileName = 200, kBufferSize = 83, kLeftSize = 40;
 typedef struct Word
@@ -544,7 +547,7 @@ VOID				^void
 MAIN				main
 id                  {letter}({letter}|{digit})*
 number              {digit}+*/
-#line 548 "lex.yy.c"
+#line 551 "lex.yy.c"
 
 #define INITIAL 0
 
@@ -726,9 +729,9 @@ YY_DECL
 	register char *yy_cp, *yy_bp;
 	register int yy_act;
     
-#line 86 "c.l"
+#line 89 "c.l"
 
-#line 732 "lex.yy.c"
+#line 735 "lex.yy.c"
 
 	if ( !(yy_init) )
 		{
@@ -824,178 +827,178 @@ do_action:	/* This label is used only to access EOF actions. */
 case 1:
 /* rule 1 can match eol */
 YY_RULE_SETUP
-#line 87 "c.l"
+#line 90 "c.l"
 {}
 	YY_BREAK
 case 2:
 /* rule 2 can match eol */
 YY_RULE_SETUP
-#line 89 "c.l"
-{printf("%s        %s", "DEFINE", yytext);}
+#line 92 "c.l"
+{yylval.st = createTree("",0);printf("%s        %s", "DEFINE", yytext);}
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 91 "c.l"
-{printf("%s        %s\n", "TYPE", yytext); return(INT);}
+#line 94 "c.l"
+{yylval.st = createTree("INT",0);printf("%s        %s\n", "TYPE", yytext); return(INT);}
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 93 "c.l"
-{printf("%s        %s\n", "VOID", yytext); return(VOID);}
+#line 96 "c.l"
+{yylval.st = createTree("VOID",0);printf("%s        %s\n", "VOID", yytext); return(VOID);}
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 95 "c.l"
-{printf("%s        %s\n", "FOR", yytext); return(FOR);}
+#line 98 "c.l"
+{yylval.st = createTree("FOR",0);printf("%s        %s\n", "FOR", yytext); return(FOR);}
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 96 "c.l"
-{printf("%s        %s\n", "IF", yytext); return(IF);}
+#line 99 "c.l"
+{yylval.st = createTree("IF",0);printf("%s        %s\n", "IF", yytext); return(IF);}
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 97 "c.l"
-{printf("%s        %s\n", "ELSE", yytext);  return(ELSE);}
+#line 100 "c.l"
+{yylval.st = createTree("ELSE",0);printf("%s        %s\n", "ELSE", yytext);  return(ELSE);}
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 98 "c.l"
-{printf("%s        %s\n", "while", yytext); return(WHILE);}
+#line 101 "c.l"
+{yylval.st = createTree("WHILE",0);printf("%s        %s\n", "while", yytext); return(WHILE);}
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 101 "c.l"
-{printf("%s        %s\n", "ASSIGN", yytext); return('=');}
+#line 104 "c.l"
+{yylval.st = createTree("=",0);printf("%s        %s\n", "ASSIGN", yytext); return('=');}
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 103 "c.l"
-{location = installID(yytext,"ID");printf("%s        %s        %d\n", "ID", yytext,location); return(IDENTIFIER);}
+#line 106 "c.l"
+{yylval.st = createTree("IDENTIFIER",0);printf("what will happen\n");location = installID(yytext,"ID");yylval.st = createTree("",0);printf("%s        %s        %d\n", "ID", yytext,location); return(IDENTIFIER);}
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 104 "c.l"
-{location = installnum(yytext,"NUMBER");printf("%s        %s        %ld\n", "NUMBER", yytext,location); return(CONSTANT_INT);}
+#line 107 "c.l"
+{location = installnum(yytext,"NUMBER");yylval.st = createTree("CONSTANT_INT",0);printf("%s        %s        %ld\n", "NUMBER", yytext,location); return(CONSTANT_INT);}
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 105 "c.l"
-{printf("\e[1;31m%s\033[0m        %s\n", "ERRORID", yytext);}
+#line 108 "c.l"
+{yylval.st = createTree("",0);printf("\e[1;31m%s\033[0m        %s\n", "ERRORID", yytext);}
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 107 "c.l"
-{printf("%s        %s\n", "LESS", yytext); return('<');}
+#line 110 "c.l"
+{yylval.st = createTree("<",0);printf("%s        %s\n", "LESS", yytext); return('<');}
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 108 "c.l"
-{printf("%s        %s\n", "GREATER", yytext); return('>');}
+#line 111 "c.l"
+{yylval.st = createTree(">",0);printf("%s        %s\n", "GREATER", yytext); return('>');}
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 109 "c.l"
-{printf("%s        %s\n", "EQUAL", yytext); return(EQ_OP);}
+#line 112 "c.l"
+{yylval.st = createTree("EQ_OP",0);printf("%s        %s\n", "EQUAL", yytext); return(EQ_OP);}
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 110 "c.l"
-{printf("%s        %s\n", "GREATEQUAL", yytext); return(LE_OP);}
+#line 113 "c.l"
+{yylval.st = createTree("GE_OP",0);printf("%s        %s\n", "GREATEQUAL", yytext); return(LE_OP);}
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 111 "c.l"
-{printf("%s        %s\n", "LESSEQUAL", yytext); return(GE_OP);}
+#line 114 "c.l"
+{yylval.st = createTree("LE_OP",0);printf("%s        %s\n", "LESSEQUAL", yytext); return(GE_OP);}
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 113 "c.l"
-{printf("%s        %s\n", "ADD", yytext); return('+');} 
+#line 116 "c.l"
+{yylval.st = createTree("+",0);printf("%s        %s\n", "ADD", yytext); return('+');} 
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 114 "c.l"
-{printf("%s        %s\n", "SUB", yytext); return('-');}
+#line 117 "c.l"
+{yylval.st = createTree("-",0);printf("%s        %s\n", "SUB", yytext); return('-');}
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 115 "c.l"
-{printf("%s        %s\n", "MUL", yytext); return('*');}
+#line 118 "c.l"
+{yylval.st = createTree("*",0);printf("%s        %s\n", "MUL", yytext); return('*');}
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 116 "c.l"
-{printf("%s        %s\n", "XOR", yytext); return('^');}
+#line 119 "c.l"
+{yylval.st = createTree("^",0);printf("%s        %s\n", "XOR", yytext); return('^');}
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 117 "c.l"
-{printf("%s        %s\n", "DIV", yytext); return('/');}
+#line 120 "c.l"
+{yylval.st = createTree("/",0);printf("%s        %s\n", "DIV", yytext); return('/');}
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
-#line 119 "c.l"
-{printf("%s        %s\n", "AND", yytext); return(AND_OP);}
+#line 122 "c.l"
+{yylval.st = createTree("AND_OP",0);printf("%s        %s\n", "AND", yytext); return(AND_OP);}
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
-#line 120 "c.l"
-{printf("%s        %s\n", "OR", yytext); return(OR_OP);}
+#line 123 "c.l"
+{yylval.st = createTree("OR_OP",0);printf("%s        %s\n", "OR", yytext); return(OR_OP);}
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
-#line 121 "c.l"
-{printf("%s        %s\n", "NE", yytext); return(NE_OP);}
+#line 124 "c.l"
+{yylval.st = createTree("NE_OP",0);printf("%s        %s\n", "NE", yytext); return(NE_OP);}
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
-#line 123 "c.l"
-{printf("%s        %s\n", "LP", yytext); return('(');}
+#line 126 "c.l"
+{yylval.st = createTree("(",0);printf("%s        %s\n", "LP", yytext); return('(');}
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
-#line 124 "c.l"
-{printf("%s        %s\n", "RP", yytext); return(')');}
+#line 127 "c.l"
+{yylval.st = createTree(")",0);printf("%s        %s\n", "RP", yytext); return(')');}
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
-#line 125 "c.l"
-{printf("%s        %s\n", "LBRACE", yytext); return('{');}
+#line 128 "c.l"
+{yylval.st = createTree("{",0);printf("%s        %s\n", "LBRACE", yytext); return('{');}
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
-#line 126 "c.l"
-{printf("%s        %s\n", "RBRACE", yytext); return('}');}
+#line 129 "c.l"
+{yylval.st = createTree("}",0);printf("%s        %s\n", "RBRACE", yytext); return('}');}
 	YY_BREAK
 case 30:
 /* rule 30 can match eol */
 YY_RULE_SETUP
-#line 128 "c.l"
+#line 131 "c.l"
 {printf("%s        %s\n", "COMMENT", yytext);}
 	YY_BREAK
 case 31:
 /* rule 31 can match eol */
 YY_RULE_SETUP
-#line 129 "c.l"
+#line 132 "c.l"
 {printf("%s        %s\n", "COMMENTS", yytext);}
 	YY_BREAK
 case 32:
 YY_RULE_SETUP
-#line 130 "c.l"
-{printf("%s        %s\n", "SEMICOLON", yytext); return(';');}
+#line 133 "c.l"
+{yylval.st = createTree(";",0);printf("%s        %s\n", "SEMICOLON", yytext); return(';');}
 	YY_BREAK
 case 33:
 YY_RULE_SETUP
-#line 131 "c.l"
-{printf("%s        %s\n", "COMMA", yytext); return(',');}
+#line 134 "c.l"
+{yylval.st = createTree(",",0);printf("%s        %s\n", "COMMA", yytext); return(',');}
 	YY_BREAK
 case 34:
 YY_RULE_SETUP
-#line 137 "c.l"
+#line 140 "c.l"
 ECHO;
 	YY_BREAK
-#line 999 "lex.yy.c"
+#line 1002 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -2004,7 +2007,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 137 "c.l"
+#line 140 "c.l"
 
 
 int look_up(char *word)

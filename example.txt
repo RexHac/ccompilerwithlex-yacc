@@ -1,2 +1,1 @@
-int a, b;
-int c, d;
+int a = 2;

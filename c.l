@@ -3,7 +3,10 @@
 #include<stdlib.h>
 #include<ctype.h>
 #include<string.h>
+#include<string>
 #include "y.tab.h"
+#include "Tree.h"
+extern int level;
 #define LEN sizeof(struct Word)
 const int kFileName = 200, kBufferSize = 83, kLeftSize = 40;
 typedef struct Word
@@ -86,49 +89,49 @@ SEMICOLON   ;
 %%
 {ws}		{}
 
-{DEFINE}	{printf("%s        %s", "DEFINE", yytext);}
+{DEFINE}	{yylval.st = createTree("",0);printf("%s        %s", "DEFINE", yytext);}
 
-{TYPE}      {printf("%s        %s\n", "TYPE", yytext); return(INT);}
+{TYPE}      {yylval.st = createTree("INT",0);printf("%s        %s\n", "TYPE", yytext); return(INT);}
 
-{VOID}      {printf("%s        %s\n", "VOID", yytext); return(VOID);}
+{VOID}      {yylval.st = createTree("VOID",0);printf("%s        %s\n", "VOID", yytext); return(VOID);}
 
-{FOR}       {printf("%s        %s\n", "FOR", yytext); return(FOR);}
-{IF}		{printf("%s        %s\n", "IF", yytext); return(IF);}
-{ELSE}      {printf("%s        %s\n", "ELSE", yytext);  return(ELSE);}
-{WHILE}      {printf("%s        %s\n", "while", yytext); return(WHILE);}
+{FOR}       {yylval.st = createTree("FOR",0);printf("%s        %s\n", "FOR", yytext); return(FOR);}
+{IF}		{yylval.st = createTree("IF",0);printf("%s        %s\n", "IF", yytext); return(IF);}
+{ELSE}      {yylval.st = createTree("ELSE",0);printf("%s        %s\n", "ELSE", yytext);  return(ELSE);}
+{WHILE}      {yylval.st = createTree("WHILE",0);printf("%s        %s\n", "while", yytext); return(WHILE);}
 
 
-{ASSIGN}    {printf("%s        %s\n", "ASSIGN", yytext); return('=');}
+{ASSIGN}    {yylval.st = createTree("=",0);printf("%s        %s\n", "ASSIGN", yytext); return('=');}
 
-{ID}		{location = installID(yytext,"ID");printf("%s        %s        %d\n", "ID", yytext,location); return(IDENTIFIER);}
-{NUMBER}    {location = installnum(yytext,"NUMBER");printf("%s        %s        %ld\n", "NUMBER", yytext,location); return(CONSTANT_INT);}
-{ERRORID}     {printf("\e[1;31m%s\033[0m        %s\n", "ERRORID", yytext);}
+{ID}		{yylval.st = createTree("IDENTIFIER",0);printf("what will happen\n");location = installID(yytext,"ID");yylval.st = createTree("",0);printf("%s        %s        %d\n", "ID", yytext,location); return(IDENTIFIER);}
+{NUMBER}    {location = installnum(yytext,"NUMBER");yylval.st = createTree("CONSTANT_INT",0);printf("%s        %s        %ld\n", "NUMBER", yytext,location); return(CONSTANT_INT);}
+{ERRORID}     {yylval.st = createTree("",0);printf("\e[1;31m%s\033[0m        %s\n", "ERRORID", yytext);}
 
-{LESS}      {printf("%s        %s\n", "LESS", yytext); return('<');}
-{GREATER}   {printf("%s        %s\n", "GREATER", yytext); return('>');}
-{EQUAL}     {printf("%s        %s\n", "EQUAL", yytext); return(EQ_OP);}
-{GREATEQUAL} {printf("%s        %s\n", "GREATEQUAL", yytext); return(LE_OP);}
-{LESSEQUAL} {printf("%s        %s\n", "LESSEQUAL", yytext); return(GE_OP);}
+{LESS}      {yylval.st = createTree("<",0);printf("%s        %s\n", "LESS", yytext); return('<');}
+{GREATER}   {yylval.st = createTree(">",0);printf("%s        %s\n", "GREATER", yytext); return('>');}
+{EQUAL}     {yylval.st = createTree("EQ_OP",0);printf("%s        %s\n", "EQUAL", yytext); return(EQ_OP);}
+{GREATEQUAL} {yylval.st = createTree("GE_OP",0);printf("%s        %s\n", "GREATEQUAL", yytext); return(LE_OP);}
+{LESSEQUAL} {yylval.st = createTree("LE_OP",0);printf("%s        %s\n", "LESSEQUAL", yytext); return(GE_OP);}
 
-{ADD}       {printf("%s        %s\n", "ADD", yytext); return('+');} 
-{SUB}       {printf("%s        %s\n", "SUB", yytext); return('-');}
-{MUL}       {printf("%s        %s\n", "MUL", yytext); return('*');}
-{XOR}       {printf("%s        %s\n", "XOR", yytext); return('^');}
-{DIV}       {printf("%s        %s\n", "DIV", yytext); return('/');}
+{ADD}       {yylval.st = createTree("+",0);printf("%s        %s\n", "ADD", yytext); return('+');} 
+{SUB}       {yylval.st = createTree("-",0);printf("%s        %s\n", "SUB", yytext); return('-');}
+{MUL}       {yylval.st = createTree("*",0);printf("%s        %s\n", "MUL", yytext); return('*');}
+{XOR}       {yylval.st = createTree("^",0);printf("%s        %s\n", "XOR", yytext); return('^');}
+{DIV}       {yylval.st = createTree("/",0);printf("%s        %s\n", "DIV", yytext); return('/');}
 
-{AND}       {printf("%s        %s\n", "AND", yytext); return(AND_OP);}
-{OR}        {printf("%s        %s\n", "OR", yytext); return(OR_OP);}
-{NE}        {printf("%s        %s\n", "NE", yytext); return(NE_OP);}
+{AND}       {yylval.st = createTree("AND_OP",0);printf("%s        %s\n", "AND", yytext); return(AND_OP);}
+{OR}        {yylval.st = createTree("OR_OP",0);printf("%s        %s\n", "OR", yytext); return(OR_OP);}
+{NE}        {yylval.st = createTree("NE_OP",0);printf("%s        %s\n", "NE", yytext); return(NE_OP);}
 
-{LP}        {printf("%s        %s\n", "LP", yytext); return('(');}
-{RP}        {printf("%s        %s\n", "RP", yytext); return(')');}
-{LBRACE}    {printf("%s        %s\n", "LBRACE", yytext); return('{');}
-{RBRACE}    {printf("%s        %s\n", "RBRACE", yytext); return('}');}
+{LP}        {yylval.st = createTree("(",0);printf("%s        %s\n", "LP", yytext); return('(');}
+{RP}        {yylval.st = createTree(")",0);printf("%s        %s\n", "RP", yytext); return(')');}
+{LBRACE}    {yylval.st = createTree("{",0);printf("%s        %s\n", "LBRACE", yytext); return('{');}
+{RBRACE}    {yylval.st = createTree("}",0);printf("%s        %s\n", "RBRACE", yytext); return('}');}
 
 {COMMENT}   {printf("%s        %s\n", "COMMENT", yytext);}
 {COMMENTS}   {printf("%s        %s\n", "COMMENTS", yytext);}
-{SEMICOLON} {printf("%s        %s\n", "SEMICOLON", yytext); return(';');}
-{COMMA} {printf("%s        %s\n", "COMMA", yytext); return(',');}
+{SEMICOLON} {yylval.st = createTree(";",0);printf("%s        %s\n", "SEMICOLON", yytext); return(';');}
+{COMMA} {yylval.st = createTree(",",0);printf("%s        %s\n", "COMMA", yytext); return(',');}
 
 
 

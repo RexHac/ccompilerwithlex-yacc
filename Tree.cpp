@@ -1,7 +1,6 @@
 #include "Tree.h"
-
-using namespace std;
-syntaxTree *createTree(string name, int num,...)
+int level;
+syntaxTree *createTree(string name, int num, ...)
 {
     va_list argList;
     syntaxTree* head = new syntaxTree();
@@ -19,16 +18,19 @@ syntaxTree *createTree(string name, int num,...)
     if (num > 0)
     {
         temp = va_arg(argList, syntaxTree*);
+        cout << "temp->name: "<<temp->name<<endl;
+        cout << "temp->value: "<<temp->value<<endl;
         // 为什么要添加一个左节点，如果是num ＝ 1 的话
         // head->line = temp->line;
         // num = 1 相当于把当前的temp完全赋值给head
         if (num == 1)
         {
             head->childrenNumber = 1;
-            head->children = new (syntaxTree＊)[1];
+            head->children = new syntaxTree*[1];
             head->children[0] = temp;
             if (temp->value.size() > 0)
             {
+                cout << "what value ???"<< temp->value<<endl;
                 head->value = temp->value;
             }
             else
@@ -38,12 +40,12 @@ syntaxTree *createTree(string name, int num,...)
         }
         else
         {
-            head->children = new (syntaxTree＊)[8];
+            head->children = new syntaxTree*[8];
             head->childrenNumber = num;
             for (int i = 0; i < num; i++)
             {
                 head->children[i] = temp;
-                temp = va_arg(argList, syntaxTree＊);
+                temp = va_arg(argList, syntaxTree*);
             }
         }
     }
@@ -56,7 +58,7 @@ syntaxTree *createTree(string name, int num,...)
     }
     return head;
 }
-void printTree(syntaxTree *head,int level)
+void printTree(syntaxTree *head)
 {
     syntaxTree *tempRoot = head;
     if (tempRoot != NULL)
@@ -68,7 +70,7 @@ void printTree(syntaxTree *head,int level)
             for(int i = 0; i < num; i++)
             {
                 tempRoot->childrenAccount[i] = level;
-                printTree(tempRoot->children[i], level);
+                printTree(tempRoot->children[i]);
             }
             
 
@@ -78,16 +80,8 @@ void printTree(syntaxTree *head,int level)
         {
             cout<<tempRoot->childrenAccount[i]<<", ";
         }
+        cout<< endl;
         
     }
 }
 
-// void freeTree(syntaxTree＊ root)
-// {
-//     if (root == NULL)
-//     {
-//         return;
-//     }
-//     freeTree(root->children);
-//     for()
-// }

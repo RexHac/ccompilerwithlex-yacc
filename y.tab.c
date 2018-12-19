@@ -170,13 +170,15 @@
 /* Copy the first part of user declarations.  */
 #line 1 "c.y"
 
-#include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
+#include<stdlib.h>
+#include<stdio.h>
+#include<string.h>
+#include<string>
 #include "Tree.h"
 
-
+extern char *yytext;
 extern int yylineno;
+extern int level;
 syntaxTree *root;
 int yylex(void);
 int yyerror(const char*); 
@@ -202,12 +204,12 @@ int yyerror(const char*);
 
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 typedef union YYSTYPE
-#line 15 "c.y"
+#line 17 "c.y"
 {
 	struct syntaxTree *st;
 }
 /* Line 193 of yacc.c.  */
-#line 211 "y.tab.c"
+#line 213 "y.tab.c"
 	YYSTYPE;
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
 # define YYSTYPE_IS_DECLARED 1
@@ -220,7 +222,7 @@ typedef union YYSTYPE
 
 
 /* Line 216 of yacc.c.  */
-#line 224 "y.tab.c"
+#line 226 "y.tab.c"
 
 #ifdef short
 # undef short
@@ -571,22 +573,22 @@ static const yytype_int8 yyrhs[] =
 /* YYRLINE[YYN] -- source line where rule number YYN was defined.  */
 static const yytype_uint16 yyrline[] =
 {
-       0,    61,    61,    68,    72,    78,    83,    90,    95,   102,
-     105,   109,   113,   117,   121,   128,   131,   138,   142,   146,
-     150,   157,   160,   163,   166,   173,   176,   179,   182,   189,
-     192,   195,   202,   205,   209,   217,   220,   223,   226,   230,
-     238,   241,   245,   252,   255,   262,   265,   272,   275,   282,
-     285,   293,   296,   304,   308,   315,   318,   322,   326,   330,
-     334,   338,   342,   346,   350,   354,   362,   366,   374,   377,
-     384,   387,   393,   396,   404,   407,   410,   413,   416,   424,
-     428,   432,   437,   441,   445,   449,   453,   462,   465,   471,
-     474,   477,   483,   486,   492,   495,   498,   501,   504,   507,
-     510,   513,   516,   519,   522,   529,   532,   536,   543,   546,
-     549,   552,   558,   564,   567,   573,   576,   583,   586,   589,
-     592,   595,   598,   605,   608,   615,   618,   624,   627,   633,
-     636,   642,   645,   652,   655,   658,   665,   668,   671,   674,
-     677,   680,   687,   690,   693,   696,   699,   705,   708,   714,
-     719,   727,   730,   736,   739
+       0,    63,    63,    70,    74,    80,    85,    92,    97,   104,
+     107,   111,   115,   119,   123,   130,   133,   140,   144,   148,
+     152,   159,   162,   165,   168,   175,   178,   181,   184,   191,
+     194,   197,   204,   207,   211,   219,   222,   225,   228,   232,
+     240,   243,   247,   254,   257,   264,   267,   274,   277,   284,
+     287,   295,   298,   306,   310,   317,   320,   324,   328,   332,
+     336,   340,   344,   348,   352,   356,   364,   368,   376,   379,
+     386,   389,   395,   398,   406,   409,   412,   415,   418,   426,
+     430,   434,   439,   443,   447,   451,   455,   464,   467,   473,
+     476,   479,   485,   488,   494,   497,   500,   503,   506,   509,
+     512,   515,   518,   521,   524,   531,   534,   538,   545,   548,
+     551,   554,   560,   566,   569,   575,   578,   585,   588,   591,
+     594,   597,   600,   607,   610,   617,   620,   626,   629,   635,
+     638,   644,   647,   654,   657,   660,   667,   670,   673,   676,
+     679,   682,   689,   692,   695,   698,   701,   707,   710,   716,
+     721,   729,   732,   738,   741
 };
 #endif
 
@@ -1772,21 +1774,21 @@ yyreduce:
   switch (yyn)
     {
         case 2:
-#line 61 "c.y"
+#line 63 "c.y"
     {
 		root = createTree("Program",1,(yyvsp[(1) - (1)].st));
 	}
     break;
 
   case 3:
-#line 68 "c.y"
+#line 70 "c.y"
     {
 		(yyval.st) = createTree("primary_expression",1,(yyvsp[(1) - (1)].st));
 	}
     break;
 
   case 4:
-#line 72 "c.y"
+#line 74 "c.y"
     {
 		(yyval.st) = createTree("primary_expression",1,(yyvsp[(1) - (1)].st));
 		// $$->type = "bool";
@@ -1795,7 +1797,7 @@ yyreduce:
     break;
 
   case 5:
-#line 78 "c.y"
+#line 80 "c.y"
     {
 		(yyval.st) = createTree("primary_expression",1,(yyvsp[(1) - (1)].st));
 		// $$->type = "bool";
@@ -1804,7 +1806,7 @@ yyreduce:
     break;
 
   case 6:
-#line 83 "c.y"
+#line 85 "c.y"
     {
 		//printf("%d",$1->int_value);
 		(yyval.st) = createTree("primary_expression",1,(yyvsp[(1) - (1)].st));
@@ -1815,7 +1817,7 @@ yyreduce:
     break;
 
   case 7:
-#line 90 "c.y"
+#line 92 "c.y"
     {
 		(yyval.st) = createTree("primary_expression",1,(yyvsp[(1) - (1)].st));
 		// $$->type = "double";
@@ -1824,21 +1826,21 @@ yyreduce:
     break;
 
   case 8:
-#line 95 "c.y"
+#line 97 "c.y"
     {
 		(yyval.st) = createTree("primary_expression",3,(yyvsp[(1) - (3)].st),(yyvsp[(2) - (3)].st),(yyvsp[(3) - (3)].st));
 	}
     break;
 
   case 9:
-#line 102 "c.y"
+#line 104 "c.y"
     {
 		(yyval.st) = createTree("postfix_expression",1,(yyvsp[(1) - (1)].st));
 	}
     break;
 
   case 10:
-#line 105 "c.y"
+#line 107 "c.y"
     {
 		(yyval.st) = createTree("postfix_expression",4,(yyvsp[(1) - (4)].st),(yyvsp[(2) - (4)].st),(yyvsp[(3) - (4)].st),(yyvsp[(4) - (4)].st));
 		//数组调用
@@ -1846,7 +1848,7 @@ yyreduce:
     break;
 
   case 11:
-#line 109 "c.y"
+#line 111 "c.y"
     {
 		(yyval.st) = createTree("postfix_expression",3,(yyvsp[(1) - (3)].st),(yyvsp[(2) - (3)].st),(yyvsp[(3) - (3)].st));
 		//函数调用
@@ -1854,7 +1856,7 @@ yyreduce:
     break;
 
   case 12:
-#line 113 "c.y"
+#line 115 "c.y"
     {
 		(yyval.st) = createTree("postfix_expression",4,(yyvsp[(1) - (4)].st),(yyvsp[(2) - (4)].st),(yyvsp[(3) - (4)].st),(yyvsp[(4) - (4)].st));
 		//函数调用
@@ -1862,7 +1864,7 @@ yyreduce:
     break;
 
   case 13:
-#line 117 "c.y"
+#line 119 "c.y"
     {
 		//++
 		(yyval.st) = createTree("postfix_expression",2,(yyvsp[(1) - (2)].st),(yyvsp[(2) - (2)].st));
@@ -1870,7 +1872,7 @@ yyreduce:
     break;
 
   case 14:
-#line 121 "c.y"
+#line 123 "c.y"
     {
 		//--
 		(yyval.st) = createTree("postfix_expression",2,(yyvsp[(1) - (2)].st),(yyvsp[(2) - (2)].st));
@@ -1878,21 +1880,21 @@ yyreduce:
     break;
 
   case 15:
-#line 128 "c.y"
+#line 130 "c.y"
     {
 		(yyval.st) = createTree("argument_expression_list",1,(yyvsp[(1) - (1)].st));
 	}
     break;
 
   case 16:
-#line 131 "c.y"
+#line 133 "c.y"
     {
 		(yyval.st) = createTree("argument_expression_list",3,(yyvsp[(1) - (3)].st),(yyvsp[(2) - (3)].st),(yyvsp[(3) - (3)].st));
 	}
     break;
 
   case 17:
-#line 138 "c.y"
+#line 140 "c.y"
     {
 		//printf("postfix");
 		(yyval.st) = createTree("unary_expression",1,(yyvsp[(1) - (1)].st));
@@ -1900,7 +1902,7 @@ yyreduce:
     break;
 
   case 18:
-#line 142 "c.y"
+#line 144 "c.y"
     {
 		//++
 		(yyval.st) = createTree("unary_expression",2,(yyvsp[(1) - (2)].st),(yyvsp[(2) - (2)].st));
@@ -1908,7 +1910,7 @@ yyreduce:
     break;
 
   case 19:
-#line 146 "c.y"
+#line 148 "c.y"
     {
 		//--
 		(yyval.st) = createTree("unary_expression",2,(yyvsp[(1) - (2)].st),(yyvsp[(2) - (2)].st));
@@ -1916,98 +1918,98 @@ yyreduce:
     break;
 
   case 20:
-#line 150 "c.y"
+#line 152 "c.y"
     {
 		(yyval.st) = createTree("unary_expression",2,(yyvsp[(1) - (2)].st),(yyvsp[(2) - (2)].st));
 	}
     break;
 
   case 21:
-#line 157 "c.y"
+#line 159 "c.y"
     {
 		(yyval.st) = createTree("unary_operator",1,(yyvsp[(1) - (1)].st));
 	}
     break;
 
   case 22:
-#line 160 "c.y"
+#line 162 "c.y"
     {
 		(yyval.st) = createTree("unary_operator",1,(yyvsp[(1) - (1)].st));
 	}
     break;
 
   case 23:
-#line 163 "c.y"
+#line 165 "c.y"
     {
 		(yyval.st) = createTree("unary_operator",1,(yyvsp[(1) - (1)].st));
 	}
     break;
 
   case 24:
-#line 166 "c.y"
+#line 168 "c.y"
     {
 		(yyval.st) = createTree("unary_operator",1,(yyvsp[(1) - (1)].st));
 	}
     break;
 
   case 25:
-#line 173 "c.y"
+#line 175 "c.y"
     {
 		(yyval.st) = createTree("multiplicative_expression",1,(yyvsp[(1) - (1)].st));
 	}
     break;
 
   case 26:
-#line 176 "c.y"
+#line 178 "c.y"
     {
 		(yyval.st) = createTree("multiplicative_expression",3,(yyvsp[(1) - (3)].st),(yyvsp[(2) - (3)].st),(yyvsp[(3) - (3)].st));
 	}
     break;
 
   case 27:
-#line 179 "c.y"
+#line 181 "c.y"
     {
 		(yyval.st) = createTree("multiplicative_expression",3,(yyvsp[(1) - (3)].st),(yyvsp[(2) - (3)].st),(yyvsp[(3) - (3)].st));
 	}
     break;
 
   case 28:
-#line 182 "c.y"
+#line 184 "c.y"
     {
 		(yyval.st) = createTree("multiplicative_expression",3,(yyvsp[(1) - (3)].st),(yyvsp[(2) - (3)].st),(yyvsp[(3) - (3)].st));
 	}
     break;
 
   case 29:
-#line 189 "c.y"
+#line 191 "c.y"
     {
 		(yyval.st) = createTree("additive_expression",1,(yyvsp[(1) - (1)].st));
 	}
     break;
 
   case 30:
-#line 192 "c.y"
+#line 194 "c.y"
     {
 		(yyval.st) = createTree("additive_expression",3,(yyvsp[(1) - (3)].st),(yyvsp[(2) - (3)].st),(yyvsp[(3) - (3)].st));
 	}
     break;
 
   case 31:
-#line 195 "c.y"
+#line 197 "c.y"
     {
 		(yyval.st) = createTree("additive_expression",3,(yyvsp[(1) - (3)].st),(yyvsp[(2) - (3)].st),(yyvsp[(3) - (3)].st));
 	}
     break;
 
   case 32:
-#line 202 "c.y"
+#line 204 "c.y"
     {
 		(yyval.st) = createTree("shift_expression",1,(yyvsp[(1) - (1)].st));
 	}
     break;
 
   case 33:
-#line 205 "c.y"
+#line 207 "c.y"
     {
 		//<<
 		(yyval.st) = createTree("shift_expression",3,(yyvsp[(1) - (3)].st),(yyvsp[(2) - (3)].st),(yyvsp[(3) - (3)].st));
@@ -2015,7 +2017,7 @@ yyreduce:
     break;
 
   case 34:
-#line 209 "c.y"
+#line 211 "c.y"
     {
 		//<<
 		(yyval.st) = createTree("shift_expression",3,(yyvsp[(1) - (3)].st),(yyvsp[(2) - (3)].st),(yyvsp[(3) - (3)].st));
@@ -2023,28 +2025,28 @@ yyreduce:
     break;
 
   case 35:
-#line 217 "c.y"
+#line 219 "c.y"
     {
 		(yyval.st) = createTree("relational_expression",1,(yyvsp[(1) - (1)].st));
 	}
     break;
 
   case 36:
-#line 220 "c.y"
+#line 222 "c.y"
     {
 		(yyval.st) = createTree("relational_expression",3,(yyvsp[(1) - (3)].st),(yyvsp[(2) - (3)].st),(yyvsp[(3) - (3)].st));
 	}
     break;
 
   case 37:
-#line 223 "c.y"
+#line 225 "c.y"
     {
 		(yyval.st) = createTree("relational_expression",3,(yyvsp[(1) - (3)].st),(yyvsp[(2) - (3)].st),(yyvsp[(3) - (3)].st));
 	}
     break;
 
   case 38:
-#line 226 "c.y"
+#line 228 "c.y"
     {
 		// <= 
 		(yyval.st) = createTree("relational_expression",3,(yyvsp[(1) - (3)].st),(yyvsp[(2) - (3)].st),(yyvsp[(3) - (3)].st));
@@ -2052,7 +2054,7 @@ yyreduce:
     break;
 
   case 39:
-#line 230 "c.y"
+#line 232 "c.y"
     {
 		// >=
 		(yyval.st) = createTree("relational_expression",3,(yyvsp[(1) - (3)].st),(yyvsp[(2) - (3)].st),(yyvsp[(3) - (3)].st));
@@ -2060,14 +2062,14 @@ yyreduce:
     break;
 
   case 40:
-#line 238 "c.y"
+#line 240 "c.y"
     {
 		(yyval.st) = createTree("equality_expression",1,(yyvsp[(1) - (1)].st));
 	}
     break;
 
   case 41:
-#line 241 "c.y"
+#line 243 "c.y"
     {
 		// ==
 		(yyval.st) = createTree("equality_expression",3,(yyvsp[(1) - (3)].st),(yyvsp[(2) - (3)].st),(yyvsp[(3) - (3)].st));
@@ -2075,7 +2077,7 @@ yyreduce:
     break;
 
   case 42:
-#line 245 "c.y"
+#line 247 "c.y"
     {
 		// !=
 		(yyval.st) = createTree("equality_expression",3,(yyvsp[(1) - (3)].st),(yyvsp[(2) - (3)].st),(yyvsp[(3) - (3)].st));
@@ -2083,56 +2085,56 @@ yyreduce:
     break;
 
   case 43:
-#line 252 "c.y"
+#line 254 "c.y"
     {
 		(yyval.st) = createTree("and_expression",1,(yyvsp[(1) - (1)].st));
 	}
     break;
 
   case 44:
-#line 255 "c.y"
+#line 257 "c.y"
     {
 		(yyval.st) = createTree("and_expression",3,(yyvsp[(1) - (3)].st),(yyvsp[(2) - (3)].st),(yyvsp[(3) - (3)].st));
 	}
     break;
 
   case 45:
-#line 262 "c.y"
+#line 264 "c.y"
     {
 		(yyval.st) = createTree("exclusive_or_expression",1,(yyvsp[(1) - (1)].st));
 	}
     break;
 
   case 46:
-#line 265 "c.y"
+#line 267 "c.y"
     {
 		(yyval.st) = createTree("exclusive_or_expression",3,(yyvsp[(1) - (3)].st),(yyvsp[(2) - (3)].st),(yyvsp[(3) - (3)].st));
 	}
     break;
 
   case 47:
-#line 272 "c.y"
+#line 274 "c.y"
     {
 		(yyval.st) = createTree("inclusive_or_expression",1,(yyvsp[(1) - (1)].st));
 	}
     break;
 
   case 48:
-#line 275 "c.y"
+#line 277 "c.y"
     {
 		(yyval.st) = createTree("inclusive_or_expression",3,(yyvsp[(1) - (3)].st),(yyvsp[(2) - (3)].st),(yyvsp[(3) - (3)].st));
 	}
     break;
 
   case 49:
-#line 282 "c.y"
+#line 284 "c.y"
     {
 		(yyval.st) = createTree("logical_and_expression",1,(yyvsp[(1) - (1)].st));
 	}
     break;
 
   case 50:
-#line 285 "c.y"
+#line 287 "c.y"
     {
 		//&&
 		(yyval.st) = createTree("logical_and_expression",3,(yyvsp[(1) - (3)].st),(yyvsp[(2) - (3)].st),(yyvsp[(3) - (3)].st));
@@ -2140,14 +2142,14 @@ yyreduce:
     break;
 
   case 51:
-#line 293 "c.y"
+#line 295 "c.y"
     {
 		(yyval.st) = createTree("logical_or_expression",1,(yyvsp[(1) - (1)].st));
 	}
     break;
 
   case 52:
-#line 296 "c.y"
+#line 298 "c.y"
     {
 		//||
 		(yyval.st) = createTree("logical_or_expression",3,(yyvsp[(1) - (3)].st),(yyvsp[(2) - (3)].st),(yyvsp[(3) - (3)].st));
@@ -2155,7 +2157,7 @@ yyreduce:
     break;
 
   case 53:
-#line 304 "c.y"
+#line 306 "c.y"
     {
 		//条件表达式
 		(yyval.st) = createTree("assignment_expression",1,(yyvsp[(1) - (1)].st));
@@ -2163,21 +2165,21 @@ yyreduce:
     break;
 
   case 54:
-#line 308 "c.y"
+#line 310 "c.y"
     {
 		(yyval.st) = createTree("assignment_expression",3,(yyvsp[(1) - (3)].st),(yyvsp[(2) - (3)].st),(yyvsp[(3) - (3)].st));
 	}
     break;
 
   case 55:
-#line 315 "c.y"
+#line 317 "c.y"
     {
 		(yyval.st) = createTree("assignment_operator",1,(yyvsp[(1) - (1)].st));
 	}
     break;
 
   case 56:
-#line 318 "c.y"
+#line 320 "c.y"
     {
 		//*=
 		(yyval.st) = createTree("assignment_operator",1,(yyvsp[(1) - (1)].st));
@@ -2185,7 +2187,7 @@ yyreduce:
     break;
 
   case 57:
-#line 322 "c.y"
+#line 324 "c.y"
     {
 		// /=
 		(yyval.st) = createTree("assignment_operator",1,(yyvsp[(1) - (1)].st));
@@ -2193,7 +2195,7 @@ yyreduce:
     break;
 
   case 58:
-#line 326 "c.y"
+#line 328 "c.y"
     {
 		// %=
 		(yyval.st) = createTree("assignment_operator",1,(yyvsp[(1) - (1)].st));
@@ -2201,7 +2203,7 @@ yyreduce:
     break;
 
   case 59:
-#line 330 "c.y"
+#line 332 "c.y"
     {
 		// += 
 		(yyval.st) = createTree("assignment_operator",1,(yyvsp[(1) - (1)].st));
@@ -2209,7 +2211,7 @@ yyreduce:
     break;
 
   case 60:
-#line 334 "c.y"
+#line 336 "c.y"
     {
 		// -=
 		(yyval.st) = createTree("assignment_operator",1,(yyvsp[(1) - (1)].st));
@@ -2217,7 +2219,7 @@ yyreduce:
     break;
 
   case 61:
-#line 338 "c.y"
+#line 340 "c.y"
     {
 		// <<=
 		(yyval.st) = createTree("assignment_operator",1,(yyvsp[(1) - (1)].st));
@@ -2225,7 +2227,7 @@ yyreduce:
     break;
 
   case 62:
-#line 342 "c.y"
+#line 344 "c.y"
     {
 		// >>=
 		(yyval.st) = createTree("assignment_operator",1,(yyvsp[(1) - (1)].st));
@@ -2233,7 +2235,7 @@ yyreduce:
     break;
 
   case 63:
-#line 346 "c.y"
+#line 348 "c.y"
     {
 		// &=
 		(yyval.st) = createTree("assignment_operator",1,(yyvsp[(1) - (1)].st));
@@ -2241,7 +2243,7 @@ yyreduce:
     break;
 
   case 64:
-#line 350 "c.y"
+#line 352 "c.y"
     {
 		// ^=
 		(yyval.st) = createTree("assignment_operator",1,(yyvsp[(1) - (1)].st));
@@ -2249,7 +2251,7 @@ yyreduce:
     break;
 
   case 65:
-#line 354 "c.y"
+#line 356 "c.y"
     {
 		// |=
 		(yyval.st) = createTree("assignment_operator",1,(yyvsp[(1) - (1)].st));
@@ -2257,7 +2259,7 @@ yyreduce:
     break;
 
   case 66:
-#line 362 "c.y"
+#line 364 "c.y"
     {
 		//赋值表达式
 		(yyval.st) = createTree("expression",1,(yyvsp[(1) - (1)].st));
@@ -2265,7 +2267,7 @@ yyreduce:
     break;
 
   case 67:
-#line 366 "c.y"
+#line 368 "c.y"
     {
 		//逗号表达式
 		(yyval.st) = createTree("expression",3,(yyvsp[(1) - (3)].st),(yyvsp[(2) - (3)].st),(yyvsp[(3) - (3)].st));
@@ -2273,84 +2275,84 @@ yyreduce:
     break;
 
   case 68:
-#line 374 "c.y"
+#line 376 "c.y"
     {
 		(yyval.st) = createTree("declaration",2,(yyvsp[(1) - (2)].st),(yyvsp[(2) - (2)].st)); //?
 	}
     break;
 
   case 69:
-#line 377 "c.y"
+#line 379 "c.y"
     {
 		(yyval.st) = createTree("declaration",3,(yyvsp[(1) - (3)].st),(yyvsp[(2) - (3)].st),(yyvsp[(3) - (3)].st));
 	}
     break;
 
   case 70:
-#line 384 "c.y"
+#line 386 "c.y"
     {
 		(yyval.st) = createTree("init_declarator_list",1,(yyvsp[(1) - (1)].st));
 	}
     break;
 
   case 71:
-#line 387 "c.y"
+#line 389 "c.y"
     {
 		(yyval.st) = createTree("init_declarator_list",3,(yyvsp[(1) - (3)].st),(yyvsp[(2) - (3)].st),(yyvsp[(3) - (3)].st));
 	}
     break;
 
   case 72:
-#line 393 "c.y"
+#line 395 "c.y"
     {
 		(yyval.st) = createTree("init_declarator",1,(yyvsp[(1) - (1)].st));
 	}
     break;
 
   case 73:
-#line 396 "c.y"
+#line 398 "c.y"
     {
 		(yyval.st) = createTree("init_declarator",3,(yyvsp[(1) - (3)].st),(yyvsp[(2) - (3)].st),(yyvsp[(3) - (3)].st));
 	}
     break;
 
   case 74:
-#line 404 "c.y"
+#line 406 "c.y"
     {
 		(yyval.st) = createTree("type_specifier",1,(yyvsp[(1) - (1)].st));
 	}
     break;
 
   case 75:
-#line 407 "c.y"
+#line 409 "c.y"
     {
 		(yyval.st) = createTree("type_specifier",1,(yyvsp[(1) - (1)].st));
 	}
     break;
 
   case 76:
-#line 410 "c.y"
+#line 412 "c.y"
     {
 		(yyval.st) = createTree("type_specifier",1,(yyvsp[(1) - (1)].st));
 	}
     break;
 
   case 77:
-#line 413 "c.y"
+#line 415 "c.y"
     {
 		(yyval.st) = createTree("type_specifier",1,(yyvsp[(1) - (1)].st));	
 	}
     break;
 
   case 78:
-#line 416 "c.y"
+#line 418 "c.y"
     {
 		(yyval.st) = createTree("type_specifier",1,(yyvsp[(1) - (1)].st));
 	}
     break;
 
   case 79:
-#line 424 "c.y"
+#line 426 "c.y"
     {
 		//变量
 		(yyval.st) = createTree("declarator",1,(yyvsp[(1) - (1)].st));
@@ -2358,7 +2360,7 @@ yyreduce:
     break;
 
   case 80:
-#line 428 "c.y"
+#line 430 "c.y"
     {
 		//.....
 		(yyval.st) = createTree("declarator",3,(yyvsp[(1) - (3)].st),(yyvsp[(2) - (3)].st),(yyvsp[(3) - (3)].st));
@@ -2366,7 +2368,7 @@ yyreduce:
     break;
 
   case 81:
-#line 432 "c.y"
+#line 434 "c.y"
     {
 		//数组
 		//printf("assignment_expression");
@@ -2375,7 +2377,7 @@ yyreduce:
     break;
 
   case 82:
-#line 437 "c.y"
+#line 439 "c.y"
     {
 		//....
 		(yyval.st) = createTree("declarator",4,(yyvsp[(1) - (4)].st),(yyvsp[(2) - (4)].st),(yyvsp[(3) - (4)].st),(yyvsp[(4) - (4)].st));
@@ -2383,7 +2385,7 @@ yyreduce:
     break;
 
   case 83:
-#line 441 "c.y"
+#line 443 "c.y"
     {
 		//数组
 		(yyval.st) = createTree("declarator",3,(yyvsp[(1) - (3)].st),(yyvsp[(2) - (3)].st),(yyvsp[(3) - (3)].st));
@@ -2391,7 +2393,7 @@ yyreduce:
     break;
 
   case 84:
-#line 445 "c.y"
+#line 447 "c.y"
     {
 		//函数
 		(yyval.st) = createTree("declarator",4,(yyvsp[(1) - (4)].st),(yyvsp[(2) - (4)].st),(yyvsp[(3) - (4)].st),(yyvsp[(4) - (4)].st));
@@ -2399,7 +2401,7 @@ yyreduce:
     break;
 
   case 85:
-#line 449 "c.y"
+#line 451 "c.y"
     {
 		//函数
 		(yyval.st) = createTree("declarator",4,(yyvsp[(1) - (4)].st),(yyvsp[(2) - (4)].st),(yyvsp[(3) - (4)].st),(yyvsp[(4) - (4)].st));
@@ -2407,7 +2409,7 @@ yyreduce:
     break;
 
   case 86:
-#line 453 "c.y"
+#line 455 "c.y"
     {
 		//函数
 		(yyval.st) = createTree("declarator",3,(yyvsp[(1) - (3)].st),(yyvsp[(2) - (3)].st),(yyvsp[(3) - (3)].st));
@@ -2415,140 +2417,140 @@ yyreduce:
     break;
 
   case 87:
-#line 462 "c.y"
+#line 464 "c.y"
     {
 		(yyval.st) = createTree("parameter_list",1,(yyvsp[(1) - (1)].st));
 	}
     break;
 
   case 88:
-#line 465 "c.y"
+#line 467 "c.y"
     {
 		(yyval.st) = createTree("parameter_list",3,(yyvsp[(1) - (3)].st),(yyvsp[(2) - (3)].st),(yyvsp[(3) - (3)].st));
 	}
     break;
 
   case 89:
-#line 471 "c.y"
+#line 473 "c.y"
     {
 		(yyval.st) = createTree("parameter_declaration",2,(yyvsp[(1) - (2)].st),(yyvsp[(2) - (2)].st));
 	}
     break;
 
   case 90:
-#line 474 "c.y"
+#line 476 "c.y"
     {
 		(yyval.st) = createTree("parameter_declaration",2,(yyvsp[(1) - (2)].st),(yyvsp[(2) - (2)].st));
 	}
     break;
 
   case 91:
-#line 477 "c.y"
+#line 479 "c.y"
     {
 		(yyval.st) = createTree("parameter_declaration",1,(yyvsp[(1) - (1)].st));
 	}
     break;
 
   case 92:
-#line 483 "c.y"
+#line 485 "c.y"
     {
 		(yyval.st) = createTree("identifier_list",1,(yyvsp[(1) - (1)].st));
 	}
     break;
 
   case 93:
-#line 486 "c.y"
+#line 488 "c.y"
     {
 		(yyval.st) = createTree("identifier_list",3,(yyvsp[(1) - (3)].st),(yyvsp[(2) - (3)].st),(yyvsp[(3) - (3)].st));
 	}
     break;
 
   case 94:
-#line 492 "c.y"
+#line 494 "c.y"
     {
 		(yyval.st) = createTree("abstract_declarator",3,(yyvsp[(1) - (3)].st),(yyvsp[(2) - (3)].st),(yyvsp[(3) - (3)].st));
 	}
     break;
 
   case 95:
-#line 495 "c.y"
+#line 497 "c.y"
     {
 		(yyval.st) = createTree("abstract_declarator",2,(yyvsp[(1) - (2)].st),(yyvsp[(2) - (2)].st));
 	}
     break;
 
   case 96:
-#line 498 "c.y"
+#line 500 "c.y"
     {
 		(yyval.st) = createTree("abstract_declarator",3,(yyvsp[(1) - (3)].st),(yyvsp[(2) - (3)].st),(yyvsp[(3) - (3)].st));
 	}
     break;
 
   case 97:
-#line 501 "c.y"
+#line 503 "c.y"
     {
 		(yyval.st) = createTree("abstract_declarator",3,(yyvsp[(1) - (3)].st),(yyvsp[(2) - (3)].st),(yyvsp[(3) - (3)].st));
 	}
     break;
 
   case 98:
-#line 504 "c.y"
+#line 506 "c.y"
     {
 		(yyval.st) = createTree("abstract_declarator",4,(yyvsp[(1) - (4)].st),(yyvsp[(2) - (4)].st),(yyvsp[(3) - (4)].st),(yyvsp[(4) - (4)].st));
 	}
     break;
 
   case 99:
-#line 507 "c.y"
+#line 509 "c.y"
     {
 		(yyval.st) = createTree("abstract_declarator",3,(yyvsp[(1) - (3)].st),(yyvsp[(2) - (3)].st),(yyvsp[(3) - (3)].st));
 	}
     break;
 
   case 100:
-#line 510 "c.y"
+#line 512 "c.y"
     {
 		(yyval.st) = createTree("abstract_declarator",4,(yyvsp[(1) - (4)].st),(yyvsp[(2) - (4)].st),(yyvsp[(3) - (4)].st),(yyvsp[(4) - (4)].st));
 	}
     break;
 
   case 101:
-#line 513 "c.y"
+#line 515 "c.y"
     {
 		(yyval.st) = createTree("abstract_declarator",2,(yyvsp[(1) - (2)].st),(yyvsp[(2) - (2)].st));
 	}
     break;
 
   case 102:
-#line 516 "c.y"
+#line 518 "c.y"
     {
 		(yyval.st) = createTree("abstract_declarator",3,(yyvsp[(1) - (3)].st),(yyvsp[(2) - (3)].st),(yyvsp[(3) - (3)].st));
 	}
     break;
 
   case 103:
-#line 519 "c.y"
+#line 521 "c.y"
     {
 		(yyval.st) = createTree("abstract_declarator",3,(yyvsp[(1) - (3)].st),(yyvsp[(2) - (3)].st),(yyvsp[(3) - (3)].st));
 	}
     break;
 
   case 104:
-#line 522 "c.y"
+#line 524 "c.y"
     {
 		(yyval.st) = createTree("abstract_declarator",4,(yyvsp[(1) - (4)].st),(yyvsp[(2) - (4)].st),(yyvsp[(3) - (4)].st),(yyvsp[(4) - (4)].st));
 	}
     break;
 
   case 105:
-#line 529 "c.y"
+#line 531 "c.y"
     {
 		(yyval.st) = createTree("initializer",1,(yyvsp[(1) - (1)].st));
 	}
     break;
 
   case 106:
-#line 532 "c.y"
+#line 534 "c.y"
     {
 		//列表初始化 {1,1,1}
 		(yyval.st) = createTree("initializer",3,(yyvsp[(1) - (3)].st),(yyvsp[(2) - (3)].st),(yyvsp[(3) - (3)].st));
@@ -2556,7 +2558,7 @@ yyreduce:
     break;
 
   case 107:
-#line 536 "c.y"
+#line 538 "c.y"
     {
 		//列表初始化 {1,1,1,}
 		(yyval.st) = createTree("initializer",4,(yyvsp[(1) - (4)].st),(yyvsp[(2) - (4)].st),(yyvsp[(3) - (4)].st),(yyvsp[(4) - (4)].st));
@@ -2564,294 +2566,294 @@ yyreduce:
     break;
 
   case 108:
-#line 543 "c.y"
+#line 545 "c.y"
     {
 		(yyval.st) = createTree("initializer_list",1,(yyvsp[(1) - (1)].st));
 	}
     break;
 
   case 109:
-#line 546 "c.y"
+#line 548 "c.y"
     {
 		(yyval.st) = createTree("initializer_list",2,(yyvsp[(1) - (2)].st),(yyvsp[(2) - (2)].st));
 	}
     break;
 
   case 110:
-#line 549 "c.y"
+#line 551 "c.y"
     {
 		(yyval.st) = createTree("initializer_list",3,(yyvsp[(1) - (3)].st),(yyvsp[(2) - (3)].st),(yyvsp[(3) - (3)].st));
 	}
     break;
 
   case 111:
-#line 552 "c.y"
+#line 554 "c.y"
     {
 		(yyval.st) = createTree("initializer_list",3,(yyvsp[(1) - (4)].st),(yyvsp[(2) - (4)].st),(yyvsp[(3) - (4)].st));
 	}
     break;
 
   case 112:
-#line 558 "c.y"
+#line 560 "c.y"
     {
 		(yyval.st) = createTree("designation",2,(yyvsp[(1) - (2)].st),(yyvsp[(2) - (2)].st));
 	}
     break;
 
   case 113:
-#line 564 "c.y"
+#line 566 "c.y"
     {
 		(yyval.st) = createTree("designator_list",1,(yyvsp[(1) - (1)].st));
 	}
     break;
 
   case 114:
-#line 567 "c.y"
+#line 569 "c.y"
     {
 		(yyval.st) = createTree("designator_list",2,(yyvsp[(1) - (2)].st),(yyvsp[(2) - (2)].st));
 	}
     break;
 
   case 115:
-#line 573 "c.y"
+#line 575 "c.y"
     {
 		(yyval.st) = createTree("designator",3,(yyvsp[(1) - (3)].st),(yyvsp[(2) - (3)].st),(yyvsp[(3) - (3)].st));
 	}
     break;
 
   case 116:
-#line 576 "c.y"
+#line 578 "c.y"
     {
 		(yyval.st) = createTree("designator",2,(yyvsp[(1) - (2)].st),(yyvsp[(2) - (2)].st));
 	}
     break;
 
   case 117:
-#line 583 "c.y"
+#line 585 "c.y"
     {
 		(yyval.st) = createTree("statement",1,(yyvsp[(1) - (1)].st));
 	}
     break;
 
   case 118:
-#line 586 "c.y"
+#line 588 "c.y"
     {
 		(yyval.st) = createTree("statement",1,(yyvsp[(1) - (1)].st));
 	}
     break;
 
   case 119:
-#line 589 "c.y"
+#line 591 "c.y"
     {
 		(yyval.st) = createTree("statement",1,(yyvsp[(1) - (1)].st));
 	}
     break;
 
   case 120:
-#line 592 "c.y"
+#line 594 "c.y"
     {
 		(yyval.st) = createTree("statement",1,(yyvsp[(1) - (1)].st));
 	}
     break;
 
   case 121:
-#line 595 "c.y"
+#line 597 "c.y"
     {
 		(yyval.st) = createTree("statement",1,(yyvsp[(1) - (1)].st));
 	}
     break;
 
   case 122:
-#line 598 "c.y"
+#line 600 "c.y"
     {
 		(yyval.st) = createTree("statement",1,(yyvsp[(1) - (1)].st));
 	}
     break;
 
   case 123:
-#line 605 "c.y"
+#line 607 "c.y"
     {
 		(yyval.st) = createTree("labeled_statement",3,(yyvsp[(1) - (3)].st),(yyvsp[(2) - (3)].st),(yyvsp[(3) - (3)].st));
 	}
     break;
 
   case 124:
-#line 608 "c.y"
+#line 610 "c.y"
     {
 		(yyval.st) = createTree("labeled_statement",4,(yyvsp[(1) - (4)].st),(yyvsp[(2) - (4)].st),(yyvsp[(3) - (4)].st),(yyvsp[(4) - (4)].st));
 	}
     break;
 
   case 125:
-#line 615 "c.y"
+#line 617 "c.y"
     {
 		(yyval.st) = createTree("compound_statement",2,(yyvsp[(1) - (2)].st),(yyvsp[(2) - (2)].st));
 	}
     break;
 
   case 126:
-#line 618 "c.y"
+#line 620 "c.y"
     {
 		(yyval.st) = createTree("compound_statement",3,(yyvsp[(1) - (3)].st),(yyvsp[(2) - (3)].st),(yyvsp[(3) - (3)].st));
 	}
     break;
 
   case 127:
-#line 624 "c.y"
+#line 626 "c.y"
     {
 		(yyval.st) = createTree("block_item_list",1,(yyvsp[(1) - (1)].st));
 	}
     break;
 
   case 128:
-#line 627 "c.y"
+#line 629 "c.y"
     {
 		(yyval.st) = createTree("block_item_list",2,(yyvsp[(1) - (2)].st),(yyvsp[(2) - (2)].st));
 	}
     break;
 
   case 129:
-#line 633 "c.y"
+#line 635 "c.y"
     {
 		(yyval.st) = createTree("block_item",1,(yyvsp[(1) - (1)].st));
 	}
     break;
 
   case 130:
-#line 636 "c.y"
+#line 638 "c.y"
     {
 		(yyval.st) = createTree("block_item",1,(yyvsp[(1) - (1)].st));
 	}
     break;
 
   case 131:
-#line 642 "c.y"
+#line 644 "c.y"
     {
 		(yyval.st) = createTree("expression_statement",1,(yyvsp[(1) - (1)].st));
 	}
     break;
 
   case 132:
-#line 645 "c.y"
+#line 647 "c.y"
     {
 		(yyval.st) = createTree("expression_statement",2,(yyvsp[(1) - (2)].st),(yyvsp[(2) - (2)].st));
 	}
     break;
 
   case 133:
-#line 652 "c.y"
+#line 654 "c.y"
     {
 		(yyval.st) = createTree("selection_statement",5,(yyvsp[(1) - (5)].st),(yyvsp[(2) - (5)].st),(yyvsp[(3) - (5)].st),(yyvsp[(4) - (5)].st),(yyvsp[(5) - (5)].st));
 	}
     break;
 
   case 134:
-#line 655 "c.y"
+#line 657 "c.y"
     {
 		(yyval.st) = createTree("selection_statement",7,(yyvsp[(1) - (7)].st),(yyvsp[(2) - (7)].st),(yyvsp[(3) - (7)].st),(yyvsp[(4) - (7)].st),(yyvsp[(5) - (7)].st),(yyvsp[(6) - (7)].st),(yyvsp[(7) - (7)].st));
 	}
     break;
 
   case 135:
-#line 658 "c.y"
+#line 660 "c.y"
     {
 		(yyval.st) = createTree("selection_statement",5,(yyvsp[(1) - (5)].st),(yyvsp[(2) - (5)].st),(yyvsp[(3) - (5)].st),(yyvsp[(4) - (5)].st),(yyvsp[(5) - (5)].st));
 	}
     break;
 
   case 136:
-#line 665 "c.y"
+#line 667 "c.y"
     {
 		(yyval.st) = createTree("iteration_statement",5,(yyvsp[(1) - (5)].st),(yyvsp[(2) - (5)].st),(yyvsp[(3) - (5)].st),(yyvsp[(4) - (5)].st),(yyvsp[(5) - (5)].st));
 	}
     break;
 
   case 137:
-#line 668 "c.y"
+#line 670 "c.y"
     {
 		(yyval.st) = createTree("iteration_statement",7,(yyvsp[(1) - (7)].st),(yyvsp[(2) - (7)].st),(yyvsp[(3) - (7)].st),(yyvsp[(4) - (7)].st),(yyvsp[(5) - (7)].st),(yyvsp[(6) - (7)].st),(yyvsp[(7) - (7)].st));
 	}
     break;
 
   case 138:
-#line 671 "c.y"
+#line 673 "c.y"
     {
 		(yyval.st) = createTree("iteration_statement",6,(yyvsp[(1) - (6)].st),(yyvsp[(2) - (6)].st),(yyvsp[(3) - (6)].st),(yyvsp[(4) - (6)].st),(yyvsp[(5) - (6)].st),(yyvsp[(6) - (6)].st));
 	}
     break;
 
   case 139:
-#line 674 "c.y"
+#line 676 "c.y"
     {
 		(yyval.st) = createTree("iteration_statement",7,(yyvsp[(1) - (7)].st),(yyvsp[(2) - (7)].st),(yyvsp[(3) - (7)].st),(yyvsp[(4) - (7)].st),(yyvsp[(5) - (7)].st),(yyvsp[(6) - (7)].st),(yyvsp[(7) - (7)].st));
 	}
     break;
 
   case 140:
-#line 677 "c.y"
+#line 679 "c.y"
     {
 		(yyval.st) = createTree("iteration_statement",6,(yyvsp[(1) - (6)].st),(yyvsp[(2) - (6)].st),(yyvsp[(3) - (6)].st),(yyvsp[(4) - (6)].st),(yyvsp[(5) - (6)].st),(yyvsp[(6) - (6)].st));
 	}
     break;
 
   case 141:
-#line 680 "c.y"
+#line 682 "c.y"
     {
 		(yyval.st) = createTree("iteration_statement",7,(yyvsp[(1) - (7)].st),(yyvsp[(2) - (7)].st),(yyvsp[(3) - (7)].st),(yyvsp[(4) - (7)].st),(yyvsp[(5) - (7)].st),(yyvsp[(6) - (7)].st),(yyvsp[(7) - (7)].st));
 	}
     break;
 
   case 142:
-#line 687 "c.y"
+#line 689 "c.y"
     {
 		(yyval.st) = createTree("jump_statement",2,(yyvsp[(1) - (3)].st),(yyvsp[(2) - (3)].st));
 	}
     break;
 
   case 143:
-#line 690 "c.y"
+#line 692 "c.y"
     {
 		(yyval.st) = createTree("jump_statement",2,(yyvsp[(1) - (2)].st),(yyvsp[(2) - (2)].st));
 	}
     break;
 
   case 144:
-#line 693 "c.y"
+#line 695 "c.y"
     {
 		(yyval.st) = createTree("jump_statement",2,(yyvsp[(1) - (2)].st),(yyvsp[(2) - (2)].st));
 	}
     break;
 
   case 145:
-#line 696 "c.y"
+#line 698 "c.y"
     {
 		(yyval.st) = createTree("jump_statement",2,(yyvsp[(1) - (2)].st),(yyvsp[(2) - (2)].st));
 	}
     break;
 
   case 146:
-#line 699 "c.y"
+#line 701 "c.y"
     {
 		(yyval.st) = createTree("jump_statement",3,(yyvsp[(1) - (3)].st),(yyvsp[(2) - (3)].st),(yyvsp[(3) - (3)].st));
 	}
     break;
 
   case 147:
-#line 705 "c.y"
+#line 707 "c.y"
     {
 		(yyval.st) = createTree("translation_unit",1,(yyvsp[(1) - (1)].st));
 	}
     break;
 
   case 148:
-#line 708 "c.y"
+#line 710 "c.y"
     {
 		(yyval.st) = createTree("translation_unit",2,(yyvsp[(1) - (2)].st),(yyvsp[(2) - (2)].st));
 	}
     break;
 
   case 149:
-#line 714 "c.y"
+#line 716 "c.y"
     {
 		(yyval.st) = createTree("external_declaration",1,(yyvsp[(1) - (1)].st));
 		//函数定义
@@ -2860,7 +2862,7 @@ yyreduce:
     break;
 
   case 150:
-#line 719 "c.y"
+#line 721 "c.y"
     {
 		(yyval.st) = createTree("external_declaration",1,(yyvsp[(1) - (1)].st));
 		//变量声明
@@ -2869,28 +2871,28 @@ yyreduce:
     break;
 
   case 151:
-#line 727 "c.y"
+#line 729 "c.y"
     {
 		(yyval.st) = createTree("function_definition",4,(yyvsp[(1) - (4)].st),(yyvsp[(2) - (4)].st),(yyvsp[(3) - (4)].st),(yyvsp[(4) - (4)].st));
 	}
     break;
 
   case 152:
-#line 730 "c.y"
+#line 732 "c.y"
     {
 		(yyval.st) = createTree("function_definition",3,(yyvsp[(1) - (3)].st),(yyvsp[(2) - (3)].st),(yyvsp[(3) - (3)].st));
 	}
     break;
 
   case 153:
-#line 736 "c.y"
+#line 738 "c.y"
     {
 		(yyval.st) = createTree("declaration_list",1,(yyvsp[(1) - (1)].st));
 	}
     break;
 
   case 154:
-#line 739 "c.y"
+#line 741 "c.y"
     {
 		(yyval.st) = createTree("declaration_list",2,(yyvsp[(1) - (2)].st),(yyvsp[(2) - (2)].st));
 	}
@@ -2898,7 +2900,7 @@ yyreduce:
 
 
 /* Line 1267 of yacc.c.  */
-#line 2902 "y.tab.c"
+#line 2904 "y.tab.c"
       default: break;
     }
   YY_SYMBOL_PRINT ("-> $$ =", yyr1[yyn], &yyval, &yyloc);
@@ -3112,7 +3114,7 @@ yyreturn:
 }
 
 
-#line 744 "c.y"
+#line 746 "c.y"
 
 
 #include <stdio.h>
@@ -3131,6 +3133,7 @@ yyreturn:
 	extern FILE* yyin;	
 	yyin=fp;
 	yyparse();
+	printTree(root);
 	// fclose(fp);
 	return 0;
  }

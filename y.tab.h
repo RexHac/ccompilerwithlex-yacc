@@ -142,7 +142,7 @@
 
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 typedef union YYSTYPE
-#line 15 "c.y"
+#line 17 "c.y"
 {
 	struct syntaxTree *st;
 }

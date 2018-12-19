@@ -1,11 +1,13 @@
 %{
-#include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
+#include<stdlib.h>
+#include<stdio.h>
+#include<string.h>
+#include<string>
 #include "Tree.h"
 
-
+extern char *yytext;
 extern int yylineno;
+extern int level;
 syntaxTree *root;
 int yylex(void);
 int yyerror(const char*); 
@@ -759,6 +761,7 @@ declaration_list:
 	extern FILE* yyin;	
 	yyin=fp;
 	yyparse();
+	printTree(root);
 	// fclose(fp);
 	return 0;
  }
