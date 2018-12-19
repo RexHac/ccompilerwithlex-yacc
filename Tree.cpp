@@ -30,8 +30,8 @@ syntaxTree *createTree(string name, int num, ...)
             head->children[0] = temp;
             if (temp->value.size() > 0)
             {
-                cout << "what value ???"<< temp->value<<endl;
-                head->value = temp->value;
+                //cout << "what value ???"<< temp->value<<endl;
+                //head->value = temp->value;
             }
             else
             {
@@ -69,8 +69,8 @@ void printTree(syntaxTree *head)
             tempRoot->childrenAccount = new int[8];
             for(int i = 0; i < num; i++)
             {
-                tempRoot->childrenAccount[i] = level;
                 printTree(tempRoot->children[i]);
+                tempRoot->childrenAccount[i] = level;
             }
             
 
