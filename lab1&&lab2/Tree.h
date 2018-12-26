@@ -4,6 +4,7 @@
 #include<cstring>
 #include<cstdarg>
 #include<string>
+#include<iomanip>
 #include<iostream>
 
 extern char *yytext;
@@ -20,7 +21,7 @@ struct syntaxTree
 };
 
 struct syntaxTree* createTree(string name, int num, ...);
-void printTree(struct syntaxTree *head);
+void printTree(struct syntaxTree *head,int level);
 // void freeTree(struct syntaxTree *head);
 
 

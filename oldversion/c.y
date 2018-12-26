@@ -7,7 +7,7 @@
 
 extern char *yytext;
 extern int yylineno;
-extern int level;
+
 syntaxTree *root;
 int yylex(void);
 int yyerror(const char*); 
@@ -761,8 +761,8 @@ declaration_list:
 	extern FILE* yyin;	
 	yyin=fp;
 	yyparse();
-	printTree(root);
-	// fclose(fp);
+	printTree(root,0);
+		// fclose(fp);
 	return 0;
  }
 int yyerror(char const *s)

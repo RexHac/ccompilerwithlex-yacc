@@ -178,7 +178,7 @@
 
 extern char *yytext;
 extern int yylineno;
-extern int level;
+
 syntaxTree *root;
 int yylex(void);
 int yyerror(const char*); 
@@ -3133,7 +3133,7 @@ yyreturn:
 	extern FILE* yyin;	
 	yyin=fp;
 	yyparse();
-	printTree(root);
+	printTree(root,0);
 	// fclose(fp);
 	return 0;
  }

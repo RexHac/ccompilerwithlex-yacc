@@ -6,7 +6,6 @@
 #include<string>
 #include "y.tab.h"
 #include "Tree.h"
-extern int level;
 #define LEN sizeof(struct Word)
 const int kFileName = 200, kBufferSize = 83, kLeftSize = 40;
 typedef struct Word
