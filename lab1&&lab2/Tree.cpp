@@ -17,8 +17,8 @@ syntaxTree *createTree(string name, int num, ...)
     if (num > 0)
     {
         temp = va_arg(argList, syntaxTree*);
-        cout << "temp->name: "<<temp->name<<endl;
-        cout << "temp->value: "<<temp->value<<endl;
+        // cout << "temp->name: "<<temp->name<<endl;
+        // cout << "temp->value: "<<temp->value<<endl;
         // 为什么要添加一个左节点，如果是num ＝ 1 的话
         // head->line = temp->line;
         // num = 1 相当于把当前的temp完全赋值给head
