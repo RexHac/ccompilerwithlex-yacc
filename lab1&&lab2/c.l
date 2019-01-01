@@ -107,7 +107,7 @@ SEMICOLON   ;
 
 {ASSIGN}    {yylval.st = createTree("=",0);printf("%s        %s\n", "ASSIGN", yytext); return('=');}
 
-{ID}		{yylval.st = createTree("IDENTIFIER",0);printf("what will happen\n");location = installID(yytext,"ID");yylval.st = createTree("",0);printf("%s        %s        %d\n", "ID", yytext,location); return(IDENTIFIER);}
+{ID}		{yylval.st = createTree("IDENTIFIER",0);printf("what will happen\n");location = installID(yytext,"ID");printf("%s        %s        %d\n", "ID", yytext,location); return(IDENTIFIER);}
 {NUMBER}    {location = installnum(yytext,"NUMBER");yylval.st = createTree("NUMBER",0);printf("%s        %s        %ld\n", "NUMBER", yytext,location); return(NUMBER);}
 {ERRORID}     {yylval.st = createTree("",0);printf("\e[1;31m%s\033[0m        %s\n", "ERRORID", yytext);}
 

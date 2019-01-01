@@ -890,7 +890,7 @@ YY_RULE_SETUP
 case 11:
 YY_RULE_SETUP
 #line 110 "c.l"
-{yylval.st = createTree("IDENTIFIER",0);printf("what will happen\n");location = installID(yytext,"ID");yylval.st = createTree("",0);printf("%s        %s        %d\n", "ID", yytext,location); return(IDENTIFIER);}
+{yylval.st = createTree("IDENTIFIER",0);printf("what will happen\n");location = installID(yytext,"ID");printf("%s        %s        %d\n", "ID", yytext,location); return(IDENTIFIER);}
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
